@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CapstoneProjectStart.Models.PatientMedicalInformation>
+
+@{
+    ViewBag.Title = "PatientMedicalInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewPatientMedicalInformation</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateNewMedPatient")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Last_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Referrals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prescriptions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Allergies)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.First_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Last_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Referrals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescriptions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allergies)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Details", "DetailsForPatientMedicalInformation", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Delete", "DeletePatientMedicalInformation", new { id=item.Patient_ID })
+        </td>
+    </tr>
+}
+
+</table>

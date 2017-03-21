@@ -1,0 +1,94 @@
+﻿@model IEnumerable<CapstoneProjectStart.Models.Appointment>
+
+@{
+    ViewBag.Title = "APPOINTMENTS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Appointments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Practitioner_Time_Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Practitioner_Time_End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Check_In)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Check_Out)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Practitioner_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time_Slot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Practitioner_Time_Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Practitioner_Time_End)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Check_In)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Check_Out)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Practitioner_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time_Slot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Details", "DetailsForAppointments", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Patient_ID })
+        </td>
+    </tr>
+}
+
+</table>

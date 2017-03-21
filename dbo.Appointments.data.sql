@@ -1,0 +1,1 @@
+﻿INSERT INTO [dbo].[Appointments] ([Patient ID], [Date], [Practitioner Time Start], [Practitioner Time End], [Check In], [Check Out], [Practitioner ], [Prescription], [Reason], [Time Slot], [Notes]) VALUES (12345, N'2017-02-23', N'04:24:00', N'05:24:00', N'04:10:00', N'05:30:00', N'Karim', N'None', N'None', N'2017-02-23 02:10:00', N'none')

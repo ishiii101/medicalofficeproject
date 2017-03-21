@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CapstoneProjectStart.Models.Prescription>
+
+@{
+    ViewBag.Title = "ViewPrescriptions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewPrescriptions</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateNewPrescription")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prescriptions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Added_On)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Added_By)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescriptions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Added_On)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Added_By)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Details", "DetailsForPrescriptions", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Delete", "DeletePrescription", new { id=item.Patient_ID })
+        </td>
+    </tr>
+}
+
+</table>

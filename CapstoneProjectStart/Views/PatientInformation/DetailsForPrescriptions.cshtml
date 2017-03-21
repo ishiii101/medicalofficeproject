@@ -1,0 +1,67 @@
+﻿@model CapstoneProjectStart.Models.Prescription
+
+@{
+    ViewBag.Title = "DetailsForPrescriptions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DetailsForPrescriptions</h2>
+
+<div>
+    <h4>Prescription</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Prescriptions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prescriptions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Added_On)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Added_On)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Added_By)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Added_By)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Patient_ID }) |
+    @Html.ActionLink("Back to List", "ViewPrescriptions")
+</p>

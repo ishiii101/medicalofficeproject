@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PatientsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="Patient ID" />
+          </Key>
+          <Property Name="Patient ID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Practitioner Time Start" Type="time" Precision="7" />
+          <Property Name="Practitioner Time End" Type="time" Precision="7" />
+          <Property Name="Check In" Type="time" Precision="7" />
+          <Property Name="Check Out" Type="time" Precision="7" />
+          <Property Name="Practitioner " Type="nvarchar" MaxLength="50" />
+          <Property Name="Prescription" Type="nvarchar(max)" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Time Slot" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PatientInformation">
+          <Key>
+            <PropertyRef Name="Patient ID" />
+          </Key>
+          <Property Name="Patient ID" Type="int" Nullable="false" />
+          <Property Name="First Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Middle Initial" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date Of Birth" Type="date" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Social Security Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Insurance" Type="bit" />
+        </EntityType>
+        <EntityType Name="PatientMedicalInformation">
+          <Key>
+            <PropertyRef Name="Patient ID" />
+          </Key>
+          <Property Name="Patient ID" Type="int" Nullable="false" />
+          <Property Name="First Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last Name" Type="nvarchar(max)" />
+          <Property Name="Referrals" Type="nvarchar(max)" />
+          <Property Name="Prescriptions" Type="nvarchar(max)" />
+          <Property Name="Allergies" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="PatientsDBModelStoreContainer">
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientInformation" EntityType="Self.PatientInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientMedicalInformation" EntityType="Self.PatientMedicalInformation" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PatientsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Practitioner_Time_Start" Type="Time" Precision="7" />
+          <Property Name="Practitioner_Time_End" Type="Time" Precision="7" />
+          <Property Name="Check_In" Type="Time" Precision="7" />
+          <Property Name="Check_Out" Type="Time" Precision="7" />
+          <Property Name="Practitioner_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time_Slot" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PatientInformation">
+          <Key>
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Middle_Initial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Social_Security_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Insurance" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PatientMedicalInformation">
+          <Key>
+            <PropertyRef Name="Patient_ID" />
+          </Key>
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Referrals" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prescriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Allergies" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="PatientsDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+          <EntitySet Name="PatientInformations" EntityType="Self.PatientInformation" />
+          <EntitySet Name="PatientMedicalInformations" EntityType="Self.PatientMedicalInformation" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PatientsDBModelStoreContainer" CdmEntityContainer="PatientsDBEntities2">
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="PatientsDBModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Practitioner_Time_Start" ColumnName="Practitioner Time Start" />
+                <ScalarProperty Name="Practitioner_Time_End" ColumnName="Practitioner Time End" />
+                <ScalarProperty Name="Check_In" ColumnName="Check In" />
+                <ScalarProperty Name="Check_Out" ColumnName="Check Out" />
+                <ScalarProperty Name="Practitioner_" ColumnName="Practitioner " />
+                <ScalarProperty Name="Prescription" ColumnName="Prescription" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Time_Slot" ColumnName="Time Slot" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientInformations">
+            <EntityTypeMapping TypeName="PatientsDBModel.PatientInformation">
+              <MappingFragment StoreEntitySet="PatientInformation">
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Middle_Initial" ColumnName="Middle Initial" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="Date_Of_Birth" ColumnName="Date Of Birth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Social_Security_Number" ColumnName="Social Security Number" />
+                <ScalarProperty Name="Insurance" ColumnName="Insurance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientMedicalInformations">
+            <EntityTypeMapping TypeName="PatientsDBModel.PatientMedicalInformation">
+              <MappingFragment StoreEntitySet="PatientMedicalInformation">
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="Referrals" ColumnName="Referrals" />
+                <ScalarProperty Name="Prescriptions" ColumnName="Prescriptions" />
+                <ScalarProperty Name="Allergies" ColumnName="Allergies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
