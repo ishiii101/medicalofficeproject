@@ -1,23 +1,19 @@
 ﻿@model IEnumerable<CapstoneProjectStart.Models.Appointment>
 
 @{
-    ViewBag.Title = "APPOINTMENTS";
+    ViewBag.Title = "UpcomingAppointments";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Appointments</h2>
+<h2>UpcomingAppointments</h2>
+<div class="form-group">
+<div class="col-md-offset-0 col-md-30">
+    <input type="submit" button id="printbtn" value="Print" class="btn btn-default" style="float: right" onclick="Print()" />
+</div>
+</div>
 
-<p>
-    @Html.ActionLink("Missed Appointments", "MissedAppointments")
-    @Html.ActionLink("Upcoming Appointments", "UpcomingAppointments")
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Patient_ID)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
@@ -54,9 +50,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Patient_ID)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
@@ -86,12 +79,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.Notes)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
-            @Html.ActionLink("Details", "DetailsForAppointments", new { id=item.Patient_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Patient_ID })
-        </td>
+      
     </tr>
 }
 
 </table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    function Print()
+    {
+        window.print();
+    }
+
+</script>

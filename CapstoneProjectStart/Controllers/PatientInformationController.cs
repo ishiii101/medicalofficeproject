@@ -5,18 +5,96 @@ using System.Web;
 using System.Web.Mvc;
 using CapstoneProjectStart.Models;
 using System.Net;
+using System.Data.Entity.Infrastructure;
+
 
 namespace CapstoneProjectStart.Controllers
 {
     public class PatientInformationController : Controller
     {
         // GET: PatientInformation
-        private PatientsDBEntities3 _db = new PatientsDBEntities3();
+        
+       
+        private PatientsDBEntities6 _db = new PatientsDBEntities6();
+      
         public ActionResult Index()
-        {
+
+        {  
             
             return View(_db.Appointments.ToList());
         }
+
+        public ActionResult ViewDoctorSchedule(Appointment appointment, object selectedDoctor)
+        {
+            var appointments = from a in _db.Appointments
+                               select a;
+
+            var doctorQuery = from d in _db.Practitioners
+                              orderby d.Last_Name
+                              select d;
+            ViewBag.DoctorName = new SelectList(doctorQuery, "DoctorID", "Name", selectedDoctor);
+
+            string doctor = ViewBag.DoctorName;
+
+
+            appointments = appointments.Where(a => a.Practitioner_==doctor);
+
+            return View(appointments.ToList());
+
+
+        }
+
+      
+
+        // GET: PatientInformation/Delete/5
+
+
+        private void PopulateDropDownList(object selectedDoctor = null)
+        {
+            var doctorQuery = from d in _db.Practitioners
+                              orderby d.Last_Name
+                              select d;
+            ViewBag.DoctorName = new SelectList(doctorQuery, "DoctorID", "Name", selectedDoctor);
+        }
+
+        public ViewResult UpcomingAppointments()
+        {
+            var appointments = from a in _db.Appointments
+                               select a;
+
+            var dateandtime = DateTime.Now;
+            var todaysDate = dateandtime.Date;
+            appointments = appointments.Where(a => a.Date > todaysDate);
+
+            return View(appointments.ToList());
+
+        }
+
+        public ViewResult MissedAppointments()
+        {
+            var appointments = from a in _db.Appointments
+                               select a;
+
+            appointments = appointments.Where(a => a.isMissed == true);
+
+            return View(appointments.ToList());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="practitioner"></param>
+        /// <returns></returns>
+       // public ViewResult DoctorSchedule([Bind(Include ="LastName")] Practitioner practitioner)
+        //{
+          //  ViewBag.Last_Name = new SelectList(practitioner.Last_Name, "Last Name");
+            
+           // var appointments = from a in _db.Appointments select a;
+
+            //appointments = appointments.Where(a => a.Practitioner_ = ViewBag.Last_Name);
+        //}
+
+       
 
         public ActionResult ViewPatientInformation ()
         {
@@ -39,7 +117,7 @@ namespace CapstoneProjectStart.Controllers
 
         public ActionResult DetailsForAppointments(int id)
         {
-
+            
             Appointment appointmentDetail = _db.Appointments.Find(id);
 
             if (appointmentDetail == null)
@@ -268,46 +346,219 @@ namespace CapstoneProjectStart.Controllers
             return RedirectToAction("ViewPatientInformation");
         }
 
-        // GET: PatientInformation/Edit/5
-       /* [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditAppointments(int id)
+        public ActionResult Edit(int? id)
+        {
+           
+
+            if (id == null)
+            {
+
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Appointment appointmentToEdit = _db.Appointments.Find(id);
+            if (appointmentToEdit == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(appointmentToEdit);
+
+
+        }
+
+
+
+
+        // POST: PatientInformation/Edit/5
+        [HttpPost, ActionName("Edit")]
+        public ActionResult EditAppointment(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Appointment appointmentToEdit = await _db.Appointments.Findsync(id);
-            if (accountCategory == null)
+
+            var appointmentToUpdate = _db.Appointments.Find(id);
+            if (TryUpdateModel(appointmentToUpdate, "", new string[] { "Patient ID", "Date", "Practitioner Time Start", "Practitioner Time End", "Check In", "Check Out", "Practitioner", "Prescription", "Reason", "Time Slot", "Notes" }))
+            {
+                try
+                {
+                    _db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+
+            }
+            return View(appointmentToUpdate);
+        }
+
+        public ActionResult EditPatient(int? id)
+        {
+
+
+            if (id == null)
+            {
+
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            PatientInformation patientToEdit = _db.PatientInformations.Find(id);
+            if (patientToEdit == null)
             {
                 return HttpNotFound();
             }
-            return View(accountCategory);
-        }*/
 
-        
-        
-        
-        // POST: PatientInformation/Edit/5
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(Appointment appointmentToEdit)
-        {
-            var originalPatient = (from m in _db.Appointments
+            return View(patientToEdit);
 
-                                 where m.Patient_ID == appointmentToEdit.Patient_ID
 
-                                 select m).First();
-            if (!ModelState.IsValid)
-
-                return View(appointmentToEdit);
-
-           
-
-            _db.SaveChanges();
-
-            return RedirectToAction("Index");
         }
 
-        // GET: PatientInformation/Delete/5
-        
+
+
+
+        // POST: PatientInformation/Edit/5
+        [HttpPost, ActionName("EditPatient")]
+        public ActionResult EditPatientConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var patientToUpdate = _db.PatientInformations.Find(id);
+            if (TryUpdateModel(patientToUpdate, "", new string[] { "First Name", "Middle Initial", "Last Name", "Date of Birth", "Gender", "Patient ID", "Insurance" }))
+            {
+                try
+                {
+                    _db.SaveChanges();
+
+                    return RedirectToAction("ViewPatientInformation");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+
+            }
+            return View(patientToUpdate);
+        }
+
+         public ActionResult EditMedPatient(int? id)
+        {
+
+
+            if (id == null)
+            {
+
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            PatientMedicalInformation patientmedToEdit = _db.PatientMedicalInformations.Find(id);
+            if (patientmedToEdit == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(patientmedToEdit);
+
+
+        }
+
+
+
+
+        // POST: PatientInformation/Edit/5
+        [HttpPost, ActionName("EditMedPatient")]
+        public ActionResult EditPatientMedConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var patientmedToUpdate = _db.PatientMedicalInformations.Find(id);
+            if (TryUpdateModel(patientmedToUpdate, "", new string[] { "First Name", "Last Name", "Referrals", "Prescriptions", "Allergies" }))
+            {
+                try
+                {
+                    _db.SaveChanges();
+
+                    return RedirectToAction("ViewPatientMedicalInformation");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+
+            }
+            return View(patientmedToUpdate);
+        }
+
+        public ActionResult EditPrescription(int? id)
+        {
+
+
+            if (id == null)
+            {
+
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Prescription prescriptionToEdit = _db.Prescriptions.Find(id);
+            if (prescriptionToEdit == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(prescriptionToEdit);
+
+
+        }
+
+
+
+
+        // POST: PatientInformation/Edit/5
+        [HttpPost, ActionName("EditPrescription")]
+        public ActionResult EditPrescriptionConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var prescriptionToUpdate = _db.Prescriptions.Find(id);
+            if (TryUpdateModel(prescriptionToUpdate, "", new string[] { "Patient ID", "Prescriptions", "Added On", "Added By", "Start Date", "End Date", "Comments" }))
+            {
+                try
+                {
+                    _db.SaveChanges();
+
+                    return RedirectToAction("ViewPrescriptions");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+
+            }
+            return View(prescriptionToUpdate);
+        }
+
+       
+
     }
 }

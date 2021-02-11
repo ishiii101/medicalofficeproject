@@ -6,6 +6,11 @@
 }
 
 <h2>DetailsForPrescriptions</h2>
+<div class="form-group">
+    <div class="col-md-offset-0 col-md-30">
+        <input type="submit" button id="printbtn" value="Print" class="btn btn-default" style="float: right" onclick="Print()" />
+    </div>
+</div>
 
 <div>
     <h4>Prescription</h4>
@@ -65,3 +70,11 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Patient_ID }) |
     @Html.ActionLink("Back to List", "ViewPrescriptions")
 </p>
+
+<script>
+    function Print()
+    {
+        window.print();
+    }
+
+</script>

@@ -1,23 +1,20 @@
 ﻿@model IEnumerable<CapstoneProjectStart.Models.Appointment>
+@model IEnumerable<CapstoneProjectStart.Models.Practitioner>
+
 
 @{
-    ViewBag.Title = "APPOINTMENTS";
+    ViewBag.Title = "ViewDoctorSchedule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Appointments</h2>
+<h2>ViewDoctorSchedule</h2>
 
 <p>
-    @Html.ActionLink("Missed Appointments", "MissedAppointments")
-    @Html.ActionLink("Upcoming Appointments", "UpcomingAppointments")
+    @Html.DropDownList("Select Doctor")
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Patient_ID)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
@@ -48,14 +45,14 @@
         <th>
             @Html.DisplayNameFor(model => model.Notes)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isMissed)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Patient_ID)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
@@ -87,8 +84,11 @@
             @Html.DisplayFor(modelItem => item.Notes)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.isMissed)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
-            @Html.ActionLink("Details", "DetailsForAppointments", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Patient_ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Patient_ID })
         </td>
     </tr>

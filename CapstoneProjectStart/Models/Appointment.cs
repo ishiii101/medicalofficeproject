@@ -25,5 +25,6 @@ namespace CapstoneProjectStart.Models
         public string Reason { get; set; }
         public Nullable<System.DateTime> Time_Slot { get; set; }
         public string Notes { get; set; }
+        public Nullable<bool> isMissed { get; set; }
     }
 }

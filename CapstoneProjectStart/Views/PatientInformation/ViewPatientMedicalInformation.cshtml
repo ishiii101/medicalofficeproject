@@ -48,7 +48,7 @@
             @Html.DisplayFor(modelItem => item.Allergies)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Edit", "EditMedPatient", new { id=item.Patient_ID }) |
             @Html.ActionLink("Details", "DetailsForPatientMedicalInformation", new { id=item.Patient_ID }) |
             @Html.ActionLink("Delete", "DeletePatientMedicalInformation", new { id=item.Patient_ID })
         </td>

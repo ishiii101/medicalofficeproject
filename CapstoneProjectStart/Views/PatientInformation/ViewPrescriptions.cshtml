@@ -60,7 +60,7 @@
             @Html.DisplayFor(modelItem => item.Comments)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Edit", "EditPrescription", new { id=item.Patient_ID }) |
             @Html.ActionLink("Details", "DetailsForPrescriptions", new { id=item.Patient_ID }) |
             @Html.ActionLink("Delete", "DeletePrescription", new { id=item.Patient_ID })
         </td>

@@ -178,48 +178,66 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs">
-      <DependentUpon>PatientsDB2.tt</DependentUpon>
+      <DependentUpon>PatientsDB6.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PatientInformation.cs">
-      <DependentUpon>PatientsDB2.tt</DependentUpon>
+      <DependentUpon>PatientsDB6.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientMedicalInformation.cs">
-      <DependentUpon>PatientsDB2.tt</DependentUpon>
+      <DependentUpon>PatientsDB6.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientsDB.Context.cs">
+    <Compile Include="Models\PatientsDB4.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientsDB.Context.tt</DependentUpon>
+      <DependentUpon>PatientsDB4.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientsDB.cs">
+    <Compile Include="Models\PatientsDB4.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientsDB.tt</DependentUpon>
+      <DependentUpon>PatientsDB4.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientsDB.Designer.cs">
+    <Compile Include="Models\PatientsDB4.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientsDB.edmx</DependentUpon>
+      <DependentUpon>PatientsDB4.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientsDB2.Context.cs">
+    <Compile Include="Models\PatientsDB5.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientsDB2.Context.tt</DependentUpon>
+      <DependentUpon>PatientsDB5.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientsDB2.cs">
+    <Compile Include="Models\PatientsDB5.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientsDB2.tt</DependentUpon>
+      <DependentUpon>PatientsDB5.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PatientsDB2.Designer.cs">
+    <Compile Include="Models\PatientsDB5.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientsDB2.edmx</DependentUpon>
+      <DependentUpon>PatientsDB5.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientsDB6.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientsDB6.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientsDB6.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientsDB6.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientsDB6.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientsDB6.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Practitioner.cs">
+      <DependentUpon>PatientsDB6.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Prescription.cs">
-      <DependentUpon>PatientsDB2.tt</DependentUpon>
+      <DependentUpon>PatientsDB6.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TestModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -254,25 +272,35 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\PatientsDB.Context.tt">
+    <Content Include="Models\PatientsDB4.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PatientsDB.edmx</DependentUpon>
-      <LastGenOutput>PatientsDB.Context.cs</LastGenOutput>
+      <DependentUpon>PatientsDB4.edmx</DependentUpon>
+      <LastGenOutput>PatientsDB4.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PatientsDB.tt">
+    <Content Include="Models\PatientsDB4.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PatientsDB.edmx</DependentUpon>
-      <LastGenOutput>PatientsDB.cs</LastGenOutput>
+      <DependentUpon>PatientsDB4.edmx</DependentUpon>
+      <LastGenOutput>PatientsDB4.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PatientsDB2.Context.tt">
+    <Content Include="Models\PatientsDB5.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PatientsDB2.edmx</DependentUpon>
-      <LastGenOutput>PatientsDB2.Context.cs</LastGenOutput>
+      <DependentUpon>PatientsDB5.edmx</DependentUpon>
+      <LastGenOutput>PatientsDB5.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PatientsDB2.tt">
+    <Content Include="Models\PatientsDB5.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PatientsDB2.edmx</DependentUpon>
-      <LastGenOutput>PatientsDB2.cs</LastGenOutput>
+      <DependentUpon>PatientsDB5.edmx</DependentUpon>
+      <LastGenOutput>PatientsDB5.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PatientsDB6.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PatientsDB6.edmx</DependentUpon>
+      <LastGenOutput>PatientsDB6.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PatientsDB6.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PatientsDB6.edmx</DependentUpon>
+      <LastGenOutput>PatientsDB6.cs</LastGenOutput>
     </Content>
     <Content Include="Models\TestModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -293,19 +321,26 @@
     <Content Include="Models\TestModel.edmx.diagram">
       <DependentUpon>TestModel.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\PatientsDB.edmx">
+    <EntityDeploy Include="Models\PatientsDB4.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PatientsDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>PatientsDB4.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\PatientsDB.edmx.diagram">
-      <DependentUpon>PatientsDB.edmx</DependentUpon>
+    <Content Include="Models\PatientsDB4.edmx.diagram">
+      <DependentUpon>PatientsDB4.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\PatientsDB2.edmx">
+    <EntityDeploy Include="Models\PatientsDB5.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PatientsDB2.Designer.cs</LastGenOutput>
+      <LastGenOutput>PatientsDB5.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\PatientsDB2.edmx.diagram">
-      <DependentUpon>PatientsDB2.edmx</DependentUpon>
+    <Content Include="Models\PatientsDB5.edmx.diagram">
+      <DependentUpon>PatientsDB5.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\PatientsDB6.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PatientsDB6.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PatientsDB6.edmx.diagram">
+      <DependentUpon>PatientsDB6.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -369,6 +404,15 @@
     <Content Include="Views\PatientInformation\DetailsForPrescriptions.cshtml" />
     <Content Include="Views\PatientInformation\CreateNewPrescription.cshtml" />
     <Content Include="Views\PatientInformation\DeletePrescription.cshtml" />
+    <Content Include="Views\PatientInformation\Calendar.cshtml" />
+    <Content Include="Views\PatientInformation\UpcomingAppointments.cshtml" />
+    <Content Include="Views\PatientInformation\MissedAppointments.cshtml" />
+    <Content Include="Views\PatientInformation\SelectPractitioner.cshtml" />
+    <Content Include="Views\PatientInformation\Edit.cshtml" />
+    <Content Include="Views\PatientInformation\EditPatient.cshtml" />
+    <Content Include="Views\PatientInformation\EditMedPatient.cshtml" />
+    <Content Include="Views\PatientInformation\EditPrescription.cshtml" />
+    <Content Include="Views\PatientInformation\ViewDoctorSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PatientsDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PatientsDB5.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appointments">
           <Key>
             <PropertyRef Name="Patient ID" />
@@ -20,6 +20,7 @@
           <Property Name="Reason" Type="nvarchar(max)" />
           <Property Name="Time Slot" Type="datetime" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="isMissed" Type="bit" />
         </EntityType>
         <EntityType Name="PatientInformation">
           <Key>
@@ -45,6 +46,14 @@
           <Property Name="Prescriptions" Type="nvarchar(max)" />
           <Property Name="Allergies" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Practitioners">
+          <Key>
+            <PropertyRef Name="Practitioner ID" />
+          </Key>
+          <Property Name="Practitioner ID" Type="int" Nullable="false" />
+          <Property Name="First Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Prescription">
           <Key>
             <PropertyRef Name="Patient ID" />
@@ -57,17 +66,18 @@
           <Property Name="End Date" Type="date" />
           <Property Name="Comments" Type="nchar" MaxLength="10" />
         </EntityType>
-        <EntityContainer Name="PatientsDBModel1StoreContainer">
+        <EntityContainer Name="PatientsDB5StoreContainer">
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientInformation" EntityType="Self.PatientInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientMedicalInformation" EntityType="Self.PatientMedicalInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Practitioners" EntityType="Self.Practitioners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PatientsDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PatientsDB5" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="Patient_ID" />
@@ -83,6 +93,7 @@
           <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Time_Slot" Type="DateTime" Precision="3" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isMissed" Type="Boolean" />
         </EntityType>
         <EntityType Name="PatientInformation">
           <Key>
@@ -108,6 +119,14 @@
           <Property Name="Prescriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Allergies" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Practitioner">
+          <Key>
+            <PropertyRef Name="Practitioner_ID" />
+          </Key>
+          <Property Name="Practitioner_ID" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Prescription">
           <Key>
             <PropertyRef Name="Patient_ID" />
@@ -120,10 +139,11 @@
           <Property Name="End_Date" Type="DateTime" Precision="0" />
           <Property Name="Comments" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="PatientsDBEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PatientsDBEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Appointments" EntityType="Self.Appointment" />
           <EntitySet Name="PatientInformations" EntityType="Self.PatientInformation" />
           <EntitySet Name="PatientMedicalInformations" EntityType="Self.PatientMedicalInformation" />
+          <EntitySet Name="Practitioners" EntityType="Self.Practitioner" />
           <EntitySet Name="Prescriptions" EntityType="Self.Prescription" />
         </EntityContainer>
       </Schema>
@@ -131,9 +151,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PatientsDBModel1StoreContainer" CdmEntityContainer="PatientsDBEntities3">
+        <EntityContainerMapping StorageEntityContainer="PatientsDB5StoreContainer" CdmEntityContainer="PatientsDBEntities5">
           <EntitySetMapping Name="Appointments">
-            <EntityTypeMapping TypeName="PatientsDBModel1.Appointment">
+            <EntityTypeMapping TypeName="PatientsDB5.Appointment">
               <MappingFragment StoreEntitySet="Appointments">
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -146,11 +166,12 @@
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="Time_Slot" ColumnName="Time Slot" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="isMissed" ColumnName="isMissed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PatientInformations">
-            <EntityTypeMapping TypeName="PatientsDBModel1.PatientInformation">
+            <EntityTypeMapping TypeName="PatientsDB5.PatientInformation">
               <MappingFragment StoreEntitySet="PatientInformation">
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient ID" />
                 <ScalarProperty Name="First_Name" ColumnName="First Name" />
@@ -164,7 +185,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PatientMedicalInformations">
-            <EntityTypeMapping TypeName="PatientsDBModel1.PatientMedicalInformation">
+            <EntityTypeMapping TypeName="PatientsDB5.PatientMedicalInformation">
               <MappingFragment StoreEntitySet="PatientMedicalInformation">
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient ID" />
                 <ScalarProperty Name="First_Name" ColumnName="First Name" />
@@ -175,8 +196,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Practitioners">
+            <EntityTypeMapping TypeName="PatientsDB5.Practitioner">
+              <MappingFragment StoreEntitySet="Practitioners">
+                <ScalarProperty Name="Practitioner_ID" ColumnName="Practitioner ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Prescriptions">
-            <EntityTypeMapping TypeName="PatientsDBModel1.Prescription">
+            <EntityTypeMapping TypeName="PatientsDB5.Prescription">
               <MappingFragment StoreEntitySet="Prescription">
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient ID" />
                 <ScalarProperty Name="Prescriptions" ColumnName="Prescriptions" />

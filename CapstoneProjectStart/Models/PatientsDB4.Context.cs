@@ -13,10 +13,10 @@ namespace CapstoneProjectStart.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PatientsDBEntities2 : DbContext
+    public partial class PatientsDBEntities4 : DbContext
     {
-        public PatientsDBEntities2()
-            : base("name=PatientsDBEntities2")
+        public PatientsDBEntities4()
+            : base("name=PatientsDBEntities4")
         {
         }
     
@@ -28,5 +28,6 @@ namespace CapstoneProjectStart.Models
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<PatientInformation> PatientInformations { get; set; }
         public virtual DbSet<PatientMedicalInformation> PatientMedicalInformations { get; set; }
+        public virtual DbSet<Prescription> Prescriptions { get; set; }
     }
 }

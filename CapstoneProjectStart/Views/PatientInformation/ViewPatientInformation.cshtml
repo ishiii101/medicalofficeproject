@@ -60,7 +60,7 @@
             @Html.DisplayFor(modelItem => item.Insurance)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Patient_ID }) |
+            @Html.ActionLink("Edit", "EditPatient", new { id=item.Patient_ID }) |
             @Html.ActionLink("Details", "DetailsForPatientInformation", new { id=item.Patient_ID }) |
             @Html.ActionLink("Delete", "DeletePatientInformation", new { id=item.Patient_ID })
         </td>
